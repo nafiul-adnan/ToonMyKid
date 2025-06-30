@@ -2,6 +2,7 @@
 import { Link } from 'react-router-dom';
 import { Star, Shield, Heart, Users, Play, ArrowRight, User, BookOpen, Package, CheckCircle, Sparkles } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import { currentOffer } from '../config/offers';
 
 const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -87,15 +88,15 @@ const Home = () => {
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section with Slider */}
-      <section className="relative bg-gradient-to-br from-sky-100 via-blue-50 to-indigo-100 py-20 overflow-hidden">
-        {/* Background Slider */}
+      {/* Hero Section with Improved Slider */}
+      <section className="relative bg-gradient-to-br from-sky-100 via-blue-50 to-indigo-100 py-20 overflow-hidden min-h-[80vh]">
+        {/* Enhanced Background Slider */}
         <div className="absolute inset-0 z-0">
           {slides.map((slide, index) => (
             <div
               key={slide.id}
               className={`absolute inset-0 transition-opacity duration-1000 ${
-                index === currentSlide ? 'opacity-30' : 'opacity-0'
+                index === currentSlide ? 'opacity-50' : 'opacity-0'
               }`}
             >
               <img 
@@ -103,52 +104,61 @@ const Home = () => {
                 alt={slide.title}
                 className="w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-br from-sky-200/60 to-indigo-200/60"></div>
+              <div className="absolute inset-0 bg-gradient-to-br from-sky-300/70 to-indigo-300/70"></div>
             </div>
           ))}
+          
+          {/* Story Info Overlay */}
+          <div className="absolute bottom-8 right-8 z-10 bg-white/90 backdrop-blur-sm rounded-lg p-4 shadow-lg">
+            <h3 className="font-bold text-gray-800">{slides[currentSlide].title}</h3>
+            <p className="text-sky-600 text-sm">{slides[currentSlide].child}</p>
+          </div>
         </div>
         
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h1 className="text-4xl md:text-6xl font-bold text-gray-800 mb-6 animate-fade-in">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center min-h-[60vh]">
+          <div className="text-center w-full">
+            <h1 className="text-5xl md:text-7xl font-bold text-gray-800 mb-6 animate-fade-in drop-shadow-lg">
               Your Child is the <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-600 to-indigo-600">Hero</span> of Their Story!
             </h1>
-            <p className="text-xl text-gray-700 mb-8 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl md:text-2xl text-gray-700 mb-8 max-w-4xl mx-auto leading-relaxed font-medium drop-shadow-sm">
               Personalized cartoon stories featuring your child as the main character. Help them learn habits, build confidence, and create lifelong memories through the magic of storytelling!
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
               <Link 
                 to="/pick-story" 
-                className="bg-gradient-to-r from-sky-500 to-indigo-500 text-white font-bold py-4 px-8 rounded-full hover:from-sky-600 hover:to-indigo-600 transition-all duration-300 transform hover:scale-105 flex items-center justify-center space-x-2"
+                className="bg-gradient-to-r from-sky-500 to-indigo-500 text-white font-bold py-4 px-8 rounded-full hover:from-sky-600 hover:to-indigo-600 transition-all duration-300 transform hover:scale-105 flex items-center justify-center space-x-2 shadow-xl"
               >
                 <Play className="h-5 w-5" />
                 <span>Get Started</span>
               </Link>
               <Link 
                 to="/demos" 
-                className="bg-white text-sky-600 font-bold py-4 px-8 rounded-full border-2 border-sky-500 hover:bg-sky-50 transition-all duration-300 transform hover:scale-105 flex items-center justify-center space-x-2"
+                className="bg-white/95 text-sky-600 font-bold py-4 px-8 rounded-full border-2 border-sky-500 hover:bg-white hover:shadow-lg transition-all duration-300 transform hover:scale-105 flex items-center justify-center space-x-2 backdrop-blur-sm"
               >
                 <span>Watch Demo Stories</span>
                 <ArrowRight className="h-5 w-5" />
               </Link>
             </div>
 
-            <div className="bg-amber-100 border border-amber-300 rounded-lg p-4 max-w-md mx-auto">
-              <p className="text-amber-800 font-semibold">🎉 Limited Time: 60% OFF all packages!</p>
-              <p className="text-amber-600 text-sm">Offer ends July 15th</p>
-            </div>
+            {currentOffer.isActive && (
+              <div className="bg-gradient-to-r from-amber-400 to-orange-500 text-white rounded-full px-6 py-3 inline-block text-lg font-bold mb-8 shadow-lg animate-pulse">
+                {currentOffer.getBannerText()}
+              </div>
+            )}
           </div>
         </div>
 
-        {/* Slider Indicators */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2 z-10">
+        {/* Enhanced Slider Indicators */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-3 z-10">
           {slides.map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrentSlide(index)}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                index === currentSlide ? 'bg-sky-500' : 'bg-white/50'
+              className={`w-4 h-4 rounded-full transition-all duration-300 ${
+                index === currentSlide 
+                  ? 'bg-white shadow-lg scale-110' 
+                  : 'bg-white/60 hover:bg-white/80'
               }`}
             />
           ))}
@@ -272,9 +282,9 @@ const Home = () => {
             </p>
           </div>
 
-          <div className="space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {faqs.map((faq, index) => (
-              <div key={index} className="bg-white rounded-xl shadow-lg p-6">
+              <div key={index} className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow duration-300">
                 <h3 className="text-lg font-bold text-gray-800 mb-3">{faq.question}</h3>
                 <p className="text-gray-600">{faq.answer}</p>
               </div>
@@ -283,9 +293,11 @@ const Home = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-sky-600 to-indigo-600 text-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      {/* Enhanced CTA Section */}
+      <section className="py-20 bg-gradient-to-r from-sky-600 to-indigo-600 text-white relative overflow-hidden">
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4xIj48Y2lyY2xlIGN4PSIzMCIgY3k9IjMwIiByPSI0Ii8+PC9nPjwvZz48L3N2Zz4=')] opacity-20"></div>
+        
+        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
             Give Your Child a Lifetime Memory
           </h2>
@@ -294,10 +306,10 @@ const Home = () => {
             They'll love watching themselves be the hero!
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
             <Link 
               to="/pick-story" 
-              className="bg-white text-sky-600 font-bold py-4 px-8 rounded-full hover:bg-gray-100 transition-all duration-300 transform hover:scale-105"
+              className="bg-white text-sky-600 font-bold py-4 px-8 rounded-full hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-xl"
             >
               Start Your Story Today
             </Link>
@@ -308,6 +320,12 @@ const Home = () => {
               See Examples First
             </Link>
           </div>
+
+          {currentOffer.isActive && (
+            <p className="text-sm opacity-90 animate-pulse">
+              {currentOffer.getDeadlineText()}
+            </p>
+          )}
         </div>
       </section>
     </div>

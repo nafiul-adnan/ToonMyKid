@@ -1,17 +1,20 @@
 
 import { Check, Users, Clock } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { currentOffer } from '../config/offers';
 
 interface PricingCardProps {
   title: string;
   duration: string;
   originalPrice: number;
-  discountedPrice: number;
+  discountedPrice?: number;
   features: string[];
   isPopular?: boolean;
 }
 
 const PricingCard = ({ title, duration, originalPrice, discountedPrice, features, isPopular }: PricingCardProps) => {
+  const finalDiscountedPrice = discountedPrice || currentOffer.getDiscountedPrice(originalPrice);
+  
   return (
     <div className={`relative bg-white rounded-2xl shadow-xl overflow-hidden transform hover:scale-105 transition-all duration-300 ${isPopular ? 'ring-4 ring-sky-500' : ''}`}>
       {isPopular && (
@@ -29,13 +32,19 @@ const PricingCard = ({ title, duration, originalPrice, discountedPrice, features
           </div>
           
           <div className="mb-4">
-            <span className="text-3xl font-bold text-red-500 line-through">${originalPrice}</span>
-            <span className="text-4xl font-bold text-emerald-600 ml-2">${discountedPrice}</span>
+            {currentOffer.isActive && (
+              <span className="text-3xl font-bold text-red-500 line-through">${originalPrice}</span>
+            )}
+            <span className={`text-4xl font-bold text-emerald-600 ${currentOffer.isActive ? 'ml-2' : ''}`}>
+              ${finalDiscountedPrice}
+            </span>
           </div>
           
-          <div className="bg-amber-100 text-amber-800 px-3 py-1 rounded-full text-sm font-semibold inline-block">
-            60% OFF - Ends July 15th!
-          </div>
+          {currentOffer.isActive && (
+            <div className="bg-amber-100 text-amber-800 px-3 py-1 rounded-full text-sm font-semibold inline-block">
+              {currentOffer.discount}% OFF - Ends {currentOffer.deadline}!
+            </div>
+          )}
         </div>
 
         <ul className="space-y-3 mb-6">

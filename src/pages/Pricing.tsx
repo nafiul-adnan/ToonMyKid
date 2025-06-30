@@ -1,6 +1,6 @@
-
 import PricingCard from '../components/PricingCard';
 import { Shield, Clock, Users, Star } from 'lucide-react';
+import { currentOffer } from '../config/offers';
 
 const Pricing = () => {
   const pricingPlans = [
@@ -8,7 +8,6 @@ const Pricing = () => {
       title: "Mini Hero",
       duration: "1 minute",
       originalPrice: 100,
-      discountedPrice: 40,
       features: [
         "Personalized cartoon character",
         "Your child's name throughout",
@@ -22,7 +21,6 @@ const Pricing = () => {
       title: "Story Champion",
       duration: "2 minutes",
       originalPrice: 200,
-      discountedPrice: 80,
       features: [
         "Everything in Mini Hero",
         "Extended storyline",
@@ -37,7 +35,6 @@ const Pricing = () => {
       title: "Epic Adventure",
       duration: "3 minutes",
       originalPrice: 300,
-      discountedPrice: 120,
       features: [
         "Everything in Story Champion",
         "Full adventure storyline",
@@ -63,9 +60,11 @@ const Pricing = () => {
           </p>
           
           {/* Discount Banner */}
-          <div className="bg-gradient-to-r from-red-500 to-pink-500 text-white rounded-full px-6 py-3 inline-block text-lg font-bold mb-8">
-            🎉 Limited Time: 60% OFF All Packages - Ends July 15th!
-          </div>
+          {currentOffer.isActive && (
+            <div className="bg-gradient-to-r from-red-500 to-pink-500 text-white rounded-full px-6 py-3 inline-block text-lg font-bold mb-8">
+              {currentOffer.getBannerText()}
+            </div>
+          )}
         </div>
 
         {/* Pricing Cards */}
@@ -179,16 +178,21 @@ const Pricing = () => {
             Ready to Make Your Child the Hero?
           </h2>
           <p className="text-xl mb-6 opacity-90">
-            Don't miss our limited-time 60% discount! Give your child a story they'll treasure forever.
+            {currentOffer.isActive 
+              ? `Don't miss our limited-time ${currentOffer.discount}% discount! Give your child a story they'll treasure forever.`
+              : "Give your child a story they'll treasure forever."
+            }
           </p>
           
           <button className="bg-white text-purple-600 font-bold py-4 px-8 rounded-full hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 text-lg">
             Start Creating Your Story Now
           </button>
           
-          <p className="text-sm mt-4 opacity-75">
-            ⏰ Discount ends July 15th - Only a few days left!
-          </p>
+          {currentOffer.isActive && (
+            <p className="text-sm mt-4 opacity-75">
+              {currentOffer.getDeadlineText()}
+            </p>
+          )}
         </div>
       </div>
     </div>
