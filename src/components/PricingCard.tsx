@@ -1,5 +1,6 @@
 
 import { Check, Users, Clock } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 interface PricingCardProps {
   title: string;
@@ -47,9 +48,12 @@ const PricingCard = ({ title, duration, originalPrice, discountedPrice, features
         </ul>
 
         <div className="space-y-3">
-          <button className="w-full bg-gradient-to-r from-sky-500 to-indigo-500 text-white font-bold py-3 px-6 rounded-lg hover:from-sky-600 hover:to-indigo-600 transition-all duration-300 transform hover:scale-105">
+          <Link 
+            to={`/contact?package=${encodeURIComponent(title)}`}
+            className="w-full bg-gradient-to-r from-sky-500 to-indigo-500 text-white font-bold py-3 px-6 rounded-lg hover:from-sky-600 hover:to-indigo-600 transition-all duration-300 transform hover:scale-105 block text-center"
+          >
             Get Started
-          </button>
+          </Link>
           
           <div className="text-center">
             <p className="text-sm text-gray-600 flex items-center justify-center space-x-1">
