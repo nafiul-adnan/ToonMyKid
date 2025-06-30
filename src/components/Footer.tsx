@@ -8,10 +8,10 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
             <div className="flex items-center space-x-2 mb-4">
-              <div className="bg-gradient-to-r from-purple-500 to-pink-500 p-2 rounded-full">
+              <div className="bg-gradient-to-r from-sky-500 to-indigo-500 p-2 rounded-full">
                 <Star className="h-5 w-5 text-white" />
               </div>
-              <h3 className="text-xl font-bold">StoryHeroes</h3>
+              <h3 className="text-xl font-bold">toonMyKid</h3>
             </div>
             <p className="text-gray-300 mb-4">
               Creating magical personalized stories that help children learn, grow, and build lifelong memories.
@@ -25,18 +25,18 @@ const Footer = () => {
           <div>
             <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
             <ul className="space-y-2 text-gray-300">
-              <li><a href="/" className="hover:text-purple-400 transition-colors">Home</a></li>
-              <li><a href="/demos" className="hover:text-purple-400 transition-colors">Demo Stories</a></li>
-              <li><a href="/pricing" className="hover:text-purple-400 transition-colors">Pricing</a></li>
-              <li><a href="/contact" className="hover:text-purple-400 transition-colors">Contact</a></li>
+              <li><a href="/" className="hover:text-sky-400 transition-colors">Home</a></li>
+              <li><a href="/demos" className="hover:text-sky-400 transition-colors">Demo Stories</a></li>
+              <li><a href="/pricing" className="hover:text-sky-400 transition-colors">Pricing</a></li>
+              <li><a href="/contact" className="hover:text-sky-400 transition-colors">Contact</a></li>
             </ul>
           </div>
 
           <div>
             <h4 className="text-lg font-semibold mb-4">Contact Info</h4>
             <div className="space-y-2 text-gray-300">
-              <p>Email: hello@storyheroes.com</p>
-              <p>Phone: (555) 123-STORY</p>
+              <p>Email: hello@toonmykid.com</p>
+              <p>Phone: (555) 123-TOON</p>
               <p>Response time: Within 24 hours</p>
             </div>
           </div>
@@ -49,7 +49,7 @@ const Footer = () => {
             <span>for children everywhere</span>
           </p>
           <p className="text-sm text-gray-400 mt-2">
-            © 2024 StoryHeroes. All rights reserved. Your child's privacy is our priority.
+            © 2024 toonMyKid. All rights reserved. Your child's privacy is our priority.
           </p>
         </div>
       </div>

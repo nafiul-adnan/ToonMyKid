@@ -21,11 +21,11 @@ const Header = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
           <Link to="/" className="flex items-center space-x-2">
-            <div className="bg-gradient-to-r from-purple-500 to-pink-500 p-2 rounded-full">
+            <div className="bg-gradient-to-r from-sky-500 to-indigo-500 p-2 rounded-full">
               <Star className="h-6 w-6 text-white" />
             </div>
             <div>
-              <h1 className="text-xl font-bold text-gray-800">StoryHeroes</h1>
+              <h1 className="text-xl font-bold text-gray-800">toonMyKid</h1>
               <p className="text-xs text-gray-600">Personalized Kids Stories</p>
             </div>
           </Link>
@@ -38,8 +38,8 @@ const Header = () => {
                 to={item.path}
                 className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                   isActive(item.path)
-                    ? 'text-purple-600 bg-purple-50'
-                    : 'text-gray-700 hover:text-purple-600 hover:bg-purple-50'
+                    ? 'text-sky-600 bg-sky-50'
+                    : 'text-gray-700 hover:text-sky-600 hover:bg-sky-50'
                 }`}
               >
                 {item.name}
@@ -51,7 +51,7 @@ const Header = () => {
           <div className="md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-gray-700 hover:text-purple-600 focus:outline-none focus:text-purple-600"
+              className="text-gray-700 hover:text-sky-600 focus:outline-none focus:text-sky-600"
             >
               {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
@@ -69,8 +69,8 @@ const Header = () => {
                   onClick={() => setIsOpen(false)}
                   className={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${
                     isActive(item.path)
-                      ? 'text-purple-600 bg-purple-50'
-                      : 'text-gray-700 hover:text-purple-600 hover:bg-purple-50'
+                      ? 'text-sky-600 bg-sky-50'
+                      : 'text-gray-700 hover:text-sky-600 hover:bg-sky-50'
                   }`}
                 >
                   {item.name}
