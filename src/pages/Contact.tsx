@@ -1,8 +1,15 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Mail, Phone, Clock, Shield, MessageCircle, Send } from 'lucide-react';
+import emailjs from 'emailjs-com';
+import { useToast } from '@/hooks/use-toast';
 
 const Contact = () => {
+  const location = useLocation();
+  const { toast } = useToast();
+  const [isLoading, setIsLoading] = useState(false);
+  
   const [formData, setFormData] = useState({
     parentName: '',
     email: '',
@@ -14,11 +21,74 @@ const Contact = () => {
     urgency: 'standard'
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // Set the story theme from URL params when component mounts
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const theme = params.get('theme');
+    if (theme) {
+      setFormData(prev => ({
+        ...prev,
+        storyTheme: theme
+      }));
+    }
+  }, [location]);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    // Here you would typically send the form data to your backend
-    alert('Thank you! We\'ll get back to you within 24 hours with next steps.');
+    setIsLoading(true);
+
+    try {
+      // Prepare the message with all form data
+      const message = `
+New Story Request:
+
+Parent Name: ${formData.parentName}
+Email: ${formData.email}
+Phone: ${formData.phone}
+Child Name: ${formData.childName}
+Child Age: ${formData.childAge}
+Story Theme: ${formData.storyTheme}
+Timeline: ${formData.urgency}
+Additional Information: ${formData.additionalInfo || 'None provided'}
+      `;
+
+      await emailjs.send(
+        "service_fyq11zf",
+        "template_ij4bygj",
+        {
+          name: formData.parentName,
+          time: new Date().toLocaleString(),
+          message: message,
+        }
+      );
+
+      toast({
+        title: "Request Sent Successfully!",
+        description: "Thank you! We'll get back to you within 24 hours with next steps.",
+      });
+
+      // Reset form
+      setFormData({
+        parentName: '',
+        email: '',
+        phone: '',
+        childName: '',
+        childAge: '',
+        storyTheme: '',
+        additionalInfo: '',
+        urgency: 'standard'
+      });
+
+    } catch (error) {
+      console.error('Error sending email:', error);
+      toast({
+        title: "Error Sending Request",
+        description: "Something went wrong. Please try again or contact us directly.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -85,11 +155,12 @@ const Contact = () => {
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Phone Number (Optional)
+                    Phone Number *
                   </label>
                   <input
                     type="tel"
                     name="phone"
+                    required
                     value={formData.phone}
                     onChange={handleInputChange}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
@@ -186,10 +257,11 @@ const Contact = () => {
 
                 <button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold py-4 px-6 rounded-lg hover:from-purple-600 hover:to-pink-600 transition-all duration-300 transform hover:scale-105 flex items-center justify-center space-x-2"
+                  disabled={isLoading}
+                  className="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold py-4 px-6 rounded-lg hover:from-purple-600 hover:to-pink-600 transition-all duration-300 transform hover:scale-105 flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <Send className="h-5 w-5" />
-                  <span>Send My Request</span>
+                  <span>{isLoading ? 'Sending...' : 'Send My Request'}</span>
                 </button>
               </form>
             </div>
