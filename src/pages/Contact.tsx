@@ -80,7 +80,8 @@ Additional Information: ${formData.additionalInfo || 'None provided'}
           name: formData.parentName,
           time: new Date().toLocaleString(),
           message: message,
-        }
+        },
+        "9sFdGsHiXBeqnVOWN",
       );
 
       toast({
@@ -342,7 +343,7 @@ Additional Information: ${formData.additionalInfo || 'None provided'}
                   </div>
                   <div>
                     <p className="font-medium text-gray-800">Email</p>
-                    <p className="text-gray-600">hello@toonMyKid.com</p>
+                    <p className="text-gray-600">corp.brainhouse@gmail.com</p>
                   </div>
                 </div>
 
@@ -352,7 +353,7 @@ Additional Information: ${formData.additionalInfo || 'None provided'}
                   </div>
                   <div>
                     <p className="font-medium text-gray-800">Phone</p>
-                    <p className="text-gray-600">(555) 123-STORY</p>
+                    <p className="text-gray-600">(+353) 871886502</p>
                   </div>
                 </div>
 
@@ -362,7 +363,7 @@ Additional Information: ${formData.additionalInfo || 'None provided'}
                   </div>
                   <div>
                     <p className="font-medium text-gray-800">Response Time</p>
-                    <p className="text-gray-600">Within 24 hours</p>
+                    <p className="text-gray-600">Within 48 hours</p>
                   </div>
                 </div>
               </div>
@@ -379,7 +380,7 @@ Additional Information: ${formData.additionalInfo || 'None provided'}
                   </div>
                   <div>
                     <p className="font-medium text-gray-800">We'll Contact You</p>
-                    <p className="text-gray-600 text-sm">Within 24 hours to discuss details and confirm your order</p>
+                    <p className="text-gray-600 text-sm">Within 48 hours to discuss details and confirm your order</p>
                   </div>
                 </div>
 

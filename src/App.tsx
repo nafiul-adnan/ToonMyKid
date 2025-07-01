@@ -12,6 +12,7 @@ import Pricing from "./pages/Pricing";
 import Contact from "./pages/Contact";
 import PickStory from "./pages/PickStory";
 import NotFound from "./pages/NotFound";
+import { Analytics } from "@vercel/analytics/react"
 
 const queryClient = new QueryClient();
 
@@ -35,6 +36,7 @@ const App = () => (
           </main>
           <Footer />
         </div>
+        <Analytics />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

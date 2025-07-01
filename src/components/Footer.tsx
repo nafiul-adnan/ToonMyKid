@@ -35,9 +35,9 @@ const Footer = () => {
           <div>
             <h4 className="text-lg font-semibold mb-4">Contact Info</h4>
             <div className="space-y-2 text-gray-300">
-              <p>Email: hello@toonmykid.com</p>
-              <p>Phone: (555) 123-TOON</p>
-              <p>Response time: Within 24 hours</p>
+              <p>Email: corp.brainhouse@gmail.com</p>
+              <p>Phone: (+353) 87-188-6502</p>
+              <p>Response time: Within 48 hours</p>
             </div>
           </div>
         </div>
