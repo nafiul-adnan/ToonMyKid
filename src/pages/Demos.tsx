@@ -1,6 +1,18 @@
+import { Play, Star, Users } from 'lucide-react';
+import { useState } from 'react';
 
-import { Play, Star, Heart, Users } from 'lucide-react';
-
+const dataPath = 'src/data'; // reference to data folder
+console.log('Data path:', dataPath); // For debugging purposes
+const featuredVideo = {
+  // spell-checker: disable-next-line
+  title: 'Ayaan Becomes a Hero',
+  // spell-checker: disable-next-line
+  thumbnail: dataPath + '/AyaanBecomesHero-Cover.jpg', // reference thumbnail from src/data folder
+  // spell-checker: disable-next-line
+  videoSrc: dataPath + '/Ayaans story.mp4', // reference video from src/data folder
+  story: "Based on a real story: Ayaan saves a kitten stuck in a bush, the kitten's owner is so grateful for that Ayaan becomes a hero in his neighborhood.",
+  duration: "1 minute",
+};
 const Demos = () => {
   const demoStories = [
     {
@@ -41,9 +53,47 @@ const Demos = () => {
     }
   ];
 
+  const [playFeatured, setPlayFeatured] = useState(false);
+
   return (
     <div className="min-h-screen bg-gray-50 py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        {/* Featured Section */}
+        <div className="mb-12">
+          <h2 className="text-3xl font-bold text-gray-800 text-center mb-4">
+            {featuredVideo.title}
+          </h2>
+          <div className="w-full max-w-4xl mx-auto rounded-2xl shadow-2xl overflow-hidden">
+            {playFeatured ? (
+              <video className="w-full" controls autoPlay>
+          <source src={featuredVideo.videoSrc} type="video/mp4" />
+          Your browser does not support the video tag.
+              </video>
+            ) : (
+              <div className="relative">
+          <img
+            src={featuredVideo.thumbnail}
+            alt={featuredVideo.title}
+            className="w-full object-cover"
+          />
+          <button
+            onClick={() => setPlayFeatured(true)}
+            className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-40 hover:bg-opacity-50 transition-colors"
+          >
+            <div className="bg-white bg-opacity-90 rounded-full p-4 hover:bg-opacity-100 transition-all cursor-pointer">
+              <Play className="h-10 w-10 text-purple-600" />
+            </div>
+          </button>
+              </div>
+            )}
+          </div>
+          <div className="max-w-4xl mx-auto mt-4 text-center">
+            <p className="text-gray-600 mb-2">{featuredVideo.story}</p>
+            <p className="text-gray-800 font-semibold">{featuredVideo.duration}</p>
+          </div>
+        </div>
+
         {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
