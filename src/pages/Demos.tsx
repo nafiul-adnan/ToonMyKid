@@ -1,19 +1,13 @@
 import { Play, Star, Users } from 'lucide-react';
 import { useState } from 'react';
 
-const dataPath =
-  process.env.NODE_ENV === 'production'
-    ? process.env.PUBLIC_URL + '/data' // In production, serve from the public folder
-    : 'src/data'; // During development, reference the source folder
-
 
 const featuredVideo = {
   // spell-checker: disable-next-line
   title: 'Ayaan Becomes a Hero',
   // spell-checker: disable-next-line
-  thumbnail: dataPath + '/AyaanBecomesHero-Cover.jpg', // reference thumbnail from src/data folder
-  // spell-checker: disable-next-line
-  videoSrc: dataPath + '/Ayaans story.mp4', // reference video from src/data folder
+  thumbnail: '/data/AyaanBecomesHero-Cover.jpg',
+  videoSrc: '/data/Ayaans story.mp4',
   story: "Based on a real story: Ayaan saves a kitten stuck in a bush, the kitten's owner is so grateful for that Ayaan becomes a hero in his neighborhood.",
   duration: "1 minute",
 };
