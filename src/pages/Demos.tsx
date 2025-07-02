@@ -1,8 +1,12 @@
 import { Play, Star, Users } from 'lucide-react';
 import { useState } from 'react';
 
-const dataPath = 'src/data'; // reference to data folder
-console.log('Data path:', dataPath); // For debugging purposes
+const dataPath =
+  process.env.NODE_ENV === 'production'
+    ? process.env.PUBLIC_URL + '/data' // In production, serve from the public folder
+    : 'src/data'; // During development, reference the source folder
+
+
 const featuredVideo = {
   // spell-checker: disable-next-line
   title: 'Ayaan Becomes a Hero',
@@ -13,6 +17,7 @@ const featuredVideo = {
   story: "Based on a real story: Ayaan saves a kitten stuck in a bush, the kitten's owner is so grateful for that Ayaan becomes a hero in his neighborhood.",
   duration: "1 minute",
 };
+
 const Demos = () => {
   const demoStories = [
     {
@@ -58,7 +63,7 @@ const Demos = () => {
   return (
     <div className="min-h-screen bg-gray-50 py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Featured Section */}
         <div className="mb-12">
           <h2 className="text-3xl font-bold text-gray-800 text-center mb-4">
@@ -67,24 +72,24 @@ const Demos = () => {
           <div className="w-full max-w-4xl mx-auto rounded-2xl shadow-2xl overflow-hidden">
             {playFeatured ? (
               <video className="w-full" controls autoPlay>
-          <source src={featuredVideo.videoSrc} type="video/mp4" />
-          Your browser does not support the video tag.
+                <source src={featuredVideo.videoSrc} type="video/mp4" />
+                Your browser does not support the video tag.
               </video>
             ) : (
               <div className="relative">
-          <img
-            src={featuredVideo.thumbnail}
-            alt={featuredVideo.title}
-            className="w-full object-cover"
-          />
-          <button
-            onClick={() => setPlayFeatured(true)}
-            className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-40 hover:bg-opacity-50 transition-colors"
-          >
-            <div className="bg-white bg-opacity-90 rounded-full p-4 hover:bg-opacity-100 transition-all cursor-pointer">
-              <Play className="h-10 w-10 text-purple-600" />
-            </div>
-          </button>
+                <img
+                  src={featuredVideo.thumbnail}
+                  alt={featuredVideo.title}
+                  className="w-full object-cover"
+                />
+                <button
+                  onClick={() => setPlayFeatured(true)}
+                  className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-40 hover:bg-opacity-50 transition-colors"
+                >
+                  <div className="bg-white bg-opacity-90 rounded-full p-4 hover:bg-opacity-100 transition-all cursor-pointer">
+                    <Play className="h-10 w-10 text-purple-600" />
+                  </div>
+                </button>
               </div>
             )}
           </div>
@@ -110,8 +115,8 @@ const Demos = () => {
             <div key={story.id} className="bg-white rounded-2xl shadow-xl overflow-hidden transform hover:scale-105 transition-all duration-300">
               {/* Video Thumbnail */}
               <div className="relative">
-                <img 
-                  src={story.thumbnail} 
+                <img
+                  src={story.thumbnail}
                   alt={story.title}
                   className="w-full h-48 object-cover"
                 />
@@ -129,7 +134,7 @@ const Demos = () => {
               <div className="p-6">
                 <h3 className="text-xl font-bold text-gray-800 mb-2">{story.title}</h3>
                 <p className="text-purple-600 font-semibold mb-3">{story.childName}</p>
-                
+
                 <div className="mb-4">
                   <h4 className="font-semibold text-gray-700 mb-1">Story:</h4>
                   <p className="text-gray-600 text-sm">{story.story}</p>
@@ -166,9 +171,9 @@ const Demos = () => {
             <div>
               <h3 className="text-lg font-semibold text-blue-800 mb-2">Privacy Protection Notice</h3>
               <p className="text-blue-700">
-                All demo stories shown here have been created with full parental consent and approval. 
-                We protect every child's privacy and only share examples when families are happy to help 
-                other parents see the magic of personalized storytelling. Your child's story will be 
+                All demo stories shown here have been created with full parental consent and approval.
+                We protect every child's privacy and only share examples when families are happy to help
+                other parents see the magic of personalized storytelling. Your child's story will be
                 completely private unless you choose to share it.
               </p>
             </div>
@@ -183,7 +188,7 @@ const Demos = () => {
           <p className="text-xl mb-6 opacity-90">
             Join hundreds of happy families who've given their children the gift of being their own hero!
           </p>
-          
+
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button className="bg-white text-purple-600 font-bold py-3 px-8 rounded-full hover:bg-gray-100 transition-all duration-300 transform hover:scale-105">
               Start Your Story
